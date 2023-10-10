@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Pokedex</title>
+</head>
+<body>
+<header class="header">
+
+    <div class="contenedor">
+        <div class="barra">
+            <a href="index.html" class="logo">
+<!--                <h1 class="logo__nombre no-margin centrar-texto">Blog<span class="logo__bold">DeCafé</span></h1>-->
+                <img class="logo__nombre no-margin" src="./img/logo_pokemon.png" alt="logo pokémon">
+            </a>
+
+            <nav class="navegacion">
+                <a href="index.html" class="navegacion__enlace">Inicio</a>
+                <a href="cursos.html" class="navegacion__enlace">Pokemons</a>
+                <a href="contacto.html" class="navegacion__enlace">Contacto</a>
+                <ul>
+                    <li class="navegacion__enlace">
+                        <!-- Sección de búsqueda -->
+                        <input type="text" id="searchInput" placeholder="Buscar por tipo o nombre">
+                        <button id="searchBtn">Buscar</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="header__texto">
+        <h2 class="no-margin">¡Bienvenido a la Pokedex!</h2>
+        <p class="no-margin">Aquí podrás encontrar a tu pokémon favorito</p>
+    </div>
+</header>
+
+<!--Aqui empieza la copia descarada de código del profe-->
+<div class="contenedor">
+    <main>
+        <div id="content">
+            <h1>Bienvenido a Mi Página Web</h1>
+            <p>En esta pagina encontraras informacion util acerca de los Pokemon.</p>
+        </div>
+        <div id="pokemonTable" class="dataTable" style="display: none;">
+            <h1>Lista de Pokémon</h1>
+            <table id="pokemonData" class="dataInfo">
+                <!-- La tabla se llenará dinámicamente aquí -->
+            </table>
+            <div id="pagination">
+                <button id="prevBtn">Anterior</button>
+                <button id="nextBtn">Siguiente</button>
+            </div>
+        </div>
+        <div id="movesTable" class="dataTable" style="display: none;">
+            <h1>Lista de Movimientos</h1>
+            <table id="movesData" class="dataInfo">
+                <!-- La tabla de movimientos se llenará dinámicamente aquí -->
+            </table>
+            <div id="movesPagination">
+                <button id="movesPrevBtn">Anterior</button>
+                <button id="movesNextBtn">Siguiente</button>
+            </div>
+        </div>
+        <div id="searchResults" style="display: none;">
+            <!-- Aquí se mostrarán los resultados de la búsqueda -->
+        </div>
+    </main>
+</div>
+<script src="./js/scripts.js"></script>
+</body>
+</html>
