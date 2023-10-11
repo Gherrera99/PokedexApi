@@ -190,11 +190,6 @@ searchBtn.addEventListener('click', async () => {
         } else{
             pokemonList = await searchPokemonByName(searchTerm.toLowerCase());
             if(pokemonList) {
-                let pokeSpecie = await searchPokemonBySpecie(pokemonList);
-                console.log(pokeSpecie.generation.name);
-                // console.log(pokeSpecie.pokedex_numbers[0].pokedex.name);
-                let regiones = await obtenerRegiones(pokeSpecie);
-                console.log(regiones);
                 busquedaTipo = 'nombre'
                 console.log(pokemonList);
                 await showPokemonTable(pokemonList, busquedaTipo);
@@ -315,7 +310,13 @@ async function showPokemonTable(pokemonList, busquedaTipo) {
 
 
 // Función para mostrar detalles de un Pokémon
-function showPokemonDetails(pokemonData) {
+async function showPokemonDetails(pokemonData) {
+    let pokeSpecie = await searchPokemonBySpecie(pokemonData);
+    console.log(pokeSpecie.generation.name);
+    // console.log(pokeSpecie.pokedex_numbers[0].pokedex.name);
+    let regiones = await obtenerRegiones(pokeSpecie);
+    console.log(regiones);
+
     // Ocultar otros contenidos y mostrar detalles del Pokémon
     content.style.display = 'none';
     movesTable.style.display = 'none';
@@ -329,7 +330,8 @@ function showPokemonDetails(pokemonData) {
         <p>Altura: ${pokemonData.height / 10} m</p>
         <p>Peso: ${pokemonData.weight / 10} kg</p>
         <p>Tipo(s): ${pokemonData.types.map(type => type.type.name).join(', ')}</p>
-        
+        <p>Generación: ${pokeSpecie.generation.name}</p>
+        <p>Región(es): ${regiones.map(region => region).join(', ')}</p>
     `;
 }
 
