@@ -44,3 +44,22 @@ function crearTabla(pokemonList, busquedaTipo){
     // Agrega la tabla al panel de resultados
     searchResults.appendChild(table);
 }
+
+
+async function obtenerRegiones(pokeSpecie){
+    const arrayRegiones = [];
+    // console.log(pokeSpecie.pokedex_numbers[0].pokedex.name);
+    for(let i = 0; i < pokeSpecie.pokedex_numbers.length; i++){
+        let pokedexName = pokeSpecie.pokedex_numbers[i].pokedex.name;
+        console.log(pokedexName);
+        let auxPokedex = await searchPokemonByPokedex(pokedexName);
+        if(auxPokedex.region === null){
+
+        }else {
+            arrayRegiones.push(auxPokedex.region.name);
+        }
+    }
+    const eliminarRepetidos = new Set(arrayRegiones);
+    const regiones = Array.from(eliminarRepetidos);
+    return regiones;
+}

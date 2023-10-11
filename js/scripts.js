@@ -190,6 +190,11 @@ searchBtn.addEventListener('click', async () => {
         } else{
             pokemonList = await searchPokemonByName(searchTerm.toLowerCase());
             if(pokemonList) {
+                let pokeSpecie = await searchPokemonBySpecie(pokemonList);
+                console.log(pokeSpecie.generation.name);
+                // console.log(pokeSpecie.pokedex_numbers[0].pokedex.name);
+                let regiones = await obtenerRegiones(pokeSpecie);
+                console.log(regiones);
                 busquedaTipo = 'nombre'
                 console.log(pokemonList);
                 await showPokemonTable(pokemonList, busquedaTipo);
@@ -200,12 +205,13 @@ searchBtn.addEventListener('click', async () => {
                 if(pokemonList) {
                     busquedaTipo = 'region'
                     console.log(pokemonList);
-                    await showPokemonTable(pokemonList, busquedaTipo);
+                    await showPokemonTable(pokemonList.pokemon_entries, busquedaTipo);
                 }
             }
         }
     }
 });
+
 
 // Función para buscar Pokémon por tipo
 async function searchPokemonByType(type) {
@@ -259,7 +265,19 @@ async function searchPokemonByPokedex(pokedex){
     try{
         let response = await fetch(`https://pokeapi.co/api/v2/pokedex/${pokedex}`);
         let data = await response.json();
-        return data.pokemon_entries;
+        return data;
+    } catch (error) {
+        console.error('Error al buscar Pokémon por región', error);
+        return null;
+    }
+}
+
+async function searchPokemonBySpecie(pokemonList){
+    let urlSpecie = pokemonList.species.url;
+    try{
+        let response = await fetch(urlSpecie);
+        let data = await response.json();
+        return data;
     } catch (error) {
         console.error('Error al buscar Pokémon por región', error);
         return null;
