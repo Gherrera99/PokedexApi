@@ -167,6 +167,7 @@ const searchResults = document.getElementById('searchResults');
 // Manejador de eventos para el botón de búsqueda
 searchBtn.addEventListener('click', async () => {
     let searchTerm = searchInput.value.trim();
+    searchInput.value = '';
     clearContent();
     let busquedaTipo = '';
 
