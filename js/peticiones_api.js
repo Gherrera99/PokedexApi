@@ -24,7 +24,7 @@ async function fetchMovesData(offset, limit) {
 
 
 // Función para buscar Pokémon por tipo
-async function searchPokemonByType(type) {
+async function searchPokemonByType(type, offset, limit) {
     try {
         let response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
         let data = await response.json();

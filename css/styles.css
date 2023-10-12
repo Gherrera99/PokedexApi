@@ -6,6 +6,7 @@
     --gris: #e1e1e1;
     --blanco: #FFFFFF;
     --negro: #000000;
+    --amarillo: #edff07;
 }
 
 html {
@@ -163,6 +164,77 @@ nav a:hover{
     }
 }
 
+.entrada {
+    border-bottom: 1px solid var(--gris);
+    margin-bottom: 2rem;
+}
+
+.entrada:last-of-type {
+    border: none;
+    margin-bottom: 0;
+}
+
+.boton {
+    display: block;
+    font-family: var(--fuenteHeading);
+    color: var(--blanco);
+    text-align: center;
+    padding: 1rem 3rem;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .boton {
+        display: inline-block; /* Se tine que utiliza inline-block para poder utilizar width y margin */
+    }
+}
+
+.boton--primario {
+    background-color: var(--negro);
+}
+
+.boton--secundario {
+    background-color: var(--primario);
+}
+
+.boton--secundario:hover{
+    background-color: var(--amarillo);
+    color: var(--negro);
+}
+
+.elemento-aside {
+    list-style: none;
+}
+
+.elemento-aside__info {
+    border-bottom: 1px solid var(--gris);
+    margin-bottom: 2rem;
+}
+
+.elemento-aside__info:last-of-type {
+    border: none;
+    margin-bottom: 0;
+}
+
+.widget-aside,
+.curso__label {
+    font-family: var(--fuenteHeading);
+    font-weight: bold;
+}
+
+.widget-aside__info,
+.curso__info {
+    font-weight: normal;
+}
+
+.widget-aside,
+.widget-aside__info {
+    font-size: 2rem;
+}
+
 #searchInput {
     padding: 10px;
     border: 1px solid #ccc;
@@ -187,7 +259,7 @@ nav a:hover{
     color: var(--negro); /* Color del texto del botón */
 }
 
-main {
+.centrado__busqueda {
     padding: 20px;
     text-align: center;
     /* Centra el contenido en el medio de la página */

@@ -61,7 +61,7 @@ async function showPokemonTable(pokemonList, busquedaTipo) {
     searchResults.style.display = 'block';
 
     // Construir la tabla de resultados
-    searchResults.innerHTML = '<h1>Resultados de la Búsqueda</h1>';
+    searchResults.innerHTML = '<h1 style="text-align: center">Resultados de la Búsqueda</h1>';
 
     if(busquedaTipo !== 'nombre'){
         crearTabla(pokemonList, busquedaTipo);
@@ -163,19 +163,10 @@ async function obtenerRegiones(pokeSpecie){
     return regiones;
 }
 
-//Función de ir "pagina principal"
-function goToHome() {
-    clearContent();
-    content.style.display = 'block';
-    content.innerHTML = `
-        <h1>Bienvenido a Mi Página Web</h1>
-        <p>En esta pagina encontraras informacion util acerca de los Pokemon</p>
-    `;
-}
-
 //Función que elimina el contenido del main
 function clearContent() {
     content.innerHTML = '';
+    content2.innerHTML = '';
     pokemonData.innerHTML = '';
     movesData.innerHTML = '';
     content.style.display = 'none';

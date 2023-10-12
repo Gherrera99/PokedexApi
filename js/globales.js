@@ -1,6 +1,9 @@
 const content = document.getElementById('content');
+const content2 = document.getElementById('content2');
 const pokemonBtn = document.getElementById('pokemonBtn');
 const movimientosBtn = document.getElementById('movimientosBtn');
+const elegirBtn = document.getElementById('elegirBtn');
+const eleMvBtn = document.getElementById('eleMvBtn');
 
 /*Pokemons table code*/
 

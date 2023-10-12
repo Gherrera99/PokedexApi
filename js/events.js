@@ -1,6 +1,7 @@
 // Manejador de eventos para el botón "Pokemons"
 pokemonBtn.addEventListener('click', async () => {
     clearContent();
+    document.getElementById('toggle').classList.remove('contenido-principal');
     offset = 0; // Reiniciamos el offset
     let pokemonList = await fetchPokemonData(offset, limit);
     await fillPokemonTable(pokemonList);
@@ -30,6 +31,7 @@ nextBtn.addEventListener('click', async () => {
 // Manejador de eventos para el botón "Movimientos"
 movimientosBtn.addEventListener('click', async () => {
     clearContent();
+    document.getElementById('toggle').classList.remove('contenido-principal');
     offset = 0; // Reiniciamos el offset
     let movesList = await fetchMovesData(offset, limit);
     await fillMovesTable(movesList);
@@ -61,18 +63,28 @@ movesNextBtn.addEventListener('click', async () => {
 
 // Manejador de eventos para el botón de búsqueda
 searchBtn.addEventListener('click', async () => {
+    document.getElementById('toggle').classList.remove('contenido-principal');
+    document.getElementById('centrado').classList.add('centrado__busqueda');
     let searchTerm = searchInput.value.trim();
     searchInput.value = '';
     clearContent();
     await filtroBusqueda(searchTerm);
 });
 
-/*Search Button actions ends*/
+elegirBtn.addEventListener('click', () =>{
+    const eventoClick = new MouseEvent('click', {
+        bubbles: true,  // Permite que el evento burbujee
+        cancelable: true,
+        view: window
+    })
+    pokemonBtn.dispatchEvent(eventoClick);
+})
 
-homeBtn.addEventListener('click', () => {
-    goToHome();
-});
-
-inicioBtn.addEventListener('click', () => {
-    goToHome();
-});
+eleMvBtn.addEventListener('click', () =>{
+    const eventoClick = new MouseEvent('click', {
+        bubbles: true,  // Permite que el evento burbujee
+        cancelable: true,
+        view: window
+    })
+    movimientosBtn.dispatchEvent(eventoClick);
+})

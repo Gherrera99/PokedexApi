@@ -16,7 +16,7 @@
             </a>
 
             <nav class="navegacion">
-                <a href="#" id="inicioBtn" class="navegacion__enlace">Inicio</a>
+                <a href="index.html" id="inicioBtn" class="navegacion__enlace">Inicio</a>
                 <a href="#" id="pokemonBtn" class="navegacion__enlace">Pokemons</a>
                 <a href="#" id="movimientosBtn" class="navegacion__enlace">Movimientos</a>
                 <ul>
@@ -36,12 +36,53 @@
     </div>
 </header>
 
-<!--Aqui empieza la copia descarada de código del profe-->
-<div class="contenedor">
-    <main>
+<div class="contenedor contenido-principal" id="toggle">
+    <main class="blog" id="centrado">
         <div id="content">
-            <h1>Bienvenido a Mi Página Web</h1>
-            <p>En esta pagina encontraras informacion util acerca de los Pokemon.</p>
+            <h3>Blog de la Pokédex</h3>
+
+            <!-- Cuando se tiene un blog o una noticia su contenido se debe colocar dentro de un article -->
+            <article class="entrada">
+                <div class="entrada_imagen">
+                    <img src="img/blog1_charizard.jpg" alt="imagen blog">
+                </div>
+
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">¡Charizard ha sido capturado!</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto consequuntur cum
+                        dolorem dolores dolorum, fugiat hic iusto minima minus natus nobis pariatur provident quis
+                        reiciendis sapiente similique tempora vel?</p>
+<!--                    <a href="entrada.html" class="boton boton&#45;&#45;primario">Leer Entrada</a>-->
+                </div>
+            </article>
+
+            <article class="entrada">
+                <div class="entrada_imagen">
+                    <img src="img/blog2_pikachu.webp" alt="imagen blog">
+                </div>
+
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">Elemental mi querido ¿Pikachu?</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto consequuntur cum
+                        dolorem dolores dolorum, fugiat hic iusto minima minus natus nobis pariatur provident quis
+                        reiciendis sapiente similique tempora vel?</p>
+<!--                    <a href="entrada.html" class="boton boton&#45;&#45;primario">Leer Entrada</a>-->
+                </div>
+            </article>
+
+            <article class="entrada">
+                <div class="entrada_imagen">
+                    <img src="img/blog3_ash.jpeg" alt="imagen blog">
+                </div>
+
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">El fin de una era: ¡Hasta pronto Ash!</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto consequuntur cum
+                        dolorem dolores dolorum, fugiat hic iusto minima minus natus nobis pariatur provident quis
+                        reiciendis sapiente similique tempora vel?</p>
+<!--                    <a href="entrada.html" class="boton boton&#45;&#45;primario">Leer Entrada</a>-->
+                </div>
+            </article>
         </div>
         <div id="pokemonTable" class="dataTable" style="display: none;">
             <h1>Lista de Pokémon</h1>
@@ -67,6 +108,25 @@
             <!-- Aquí se mostrarán los resultados de la búsqueda -->
         </div>
     </main>
+    <div id="content2">
+        <aside class="sidebar">
+            <h3>Conviértete en maestro Pokémon</h3>
+
+            <ul class="elemento-aside no-padding"> <!-- Lista no ordenada -->
+                <li class="elemento-aside__info">
+                    <h4 class="no-margin">Listado de Pokémons</h4>
+                    <img src="./img/aside1.jpg" alt="imagen aside1">
+                    <a href="#" id="elegirBtn" class="boton boton--secundario">¡Yo te Elijo!</a>
+                </li>
+
+                <li class="elemento-aside__info">
+                    <h4 class="no-margin">Listado de Movimientos</h4>
+                    <img src="./img/aside2.jpg" alt="imagen aside2">
+                    <a href="#" id="eleMvBtn" class="boton boton--secundario">¡Yo te Elijo!</a>
+                </li>
+            </ul>
+        </aside>
+    </div>
 </div>
 <footer class="footer">
     <div class="contenedor">
