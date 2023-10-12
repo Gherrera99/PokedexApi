@@ -1,3 +1,102 @@
+// Función para llenar la tabla con datos de Pokémon con pokemonBtn
+async function fillPokemonTable(pokemonList) {
+    let pokemonDetailsPromises = pokemonList.map(async (pokemon) => {
+        let response = await fetch(pokemon.url);
+        return response.json();
+    });
+
+    let pokemonDetails = await Promise.all(pokemonDetailsPromises);
+
+    pokemonData.innerHTML = '';
+    pokemonDetails.forEach((data) => {
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${data.id}</td>
+            <td><img src="${data.sprites.front_default}"></td>
+            <td>${data.name}</td>
+            <td>${data.types.map(type => type.type.name).join(', ')}</td>
+        `;
+        pokemonData.appendChild(row);
+    });
+}
+
+// Función para actualizar los botones de paginación
+function updatePaginationButtons() {
+    prevBtn.disabled = offset === 0;
+    nextBtn.disabled = offset >= 900; // Límite arbitrario de Pokémon (debes ajustarlo)
+}
+
+// Función para actualizar los botones de paginación de movimientos
+function updateMovesPaginationButtons() {
+    movesPrevBtn.disabled = offset === 0;
+    movesNextBtn.disabled = offset >= 164; // Límite arbitrario de movimientos (ajusta según tus necesidades)
+}
+
+// Función para llenar la tabla de movimientos con datos
+async function fillMovesTable(movesList) {
+    const movesDetailsPromises = movesList.map(async (move) => {
+        let response = await fetch(move.url);
+        return response.json();
+    });
+
+    const movesDetails = await Promise.all(movesDetailsPromises);
+
+    movesData.innerHTML = '';
+    movesDetails.forEach((data) => {
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${data.id}</td>
+            <td>${data.name}</td>
+            <td>${data.type.name}</td>
+        `;
+        movesData.appendChild(row);
+    });
+}
+
+// Función para mostrar la tabla de Pokémon de búsqueda
+async function showPokemonTable(pokemonList, busquedaTipo) {
+    // Ocultar otros contenidos y mostrar la tabla de Pokémon
+    content.style.display = 'none';
+    movesTable.style.display = 'none';
+    searchResults.style.display = 'block';
+
+    // Construir la tabla de resultados
+    searchResults.innerHTML = '<h1>Resultados de la Búsqueda</h1>';
+
+    if(busquedaTipo !== 'nombre'){
+        crearTabla(pokemonList, busquedaTipo);
+    } else{
+        return showPokemonDetails(pokemonList);
+    }
+}
+
+// Función para mostrar detalles de un Pokémon
+async function showPokemonDetails(pokemonData) {
+    let pokeSpecie = await searchPokemonBySpecie(pokemonData);
+    console.log(pokeSpecie.generation.name);
+    // console.log(pokeSpecie.pokedex_numbers[0].pokedex.name);
+    let regiones = await obtenerRegiones(pokeSpecie);
+    console.log(regiones);
+
+    // Ocultar otros contenidos y mostrar detalles del Pokémon
+    content.style.display = 'none';
+    movesTable.style.display = 'none';
+    searchResults.style.display = 'block'
+
+    // Construir la información del Pokémon y mostrarla en el panel principal
+    searchResults.innerHTML = `
+        <h1>Resultados de la Búsqueda</h1>
+        <h2>${pokemonData.name.toUpperCase()}</h2>
+        <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
+        <p>Altura: ${pokemonData.height / 10} m</p>
+        <p>Peso: ${pokemonData.weight / 10} kg</p>
+        <p>Tipo(s): ${pokemonData.types.map(type => type.type.name).join(', ')}</p>
+        <p>Generación: ${pokeSpecie.generation.name}</p>
+        <p>Región(es): ${regiones.map(region => region).join(', ')}</p>
+    `;
+}
+
+//Crea la tabla de las busquedas
 function crearTabla(pokemonList, busquedaTipo){
     let table = document.createElement('table');
     // table.id = "pokemonsByTypeTable";
@@ -45,7 +144,7 @@ function crearTabla(pokemonList, busquedaTipo){
     searchResults.appendChild(table);
 }
 
-
+//Función que obtiene las regiones
 async function obtenerRegiones(pokeSpecie){
     const arrayRegiones = [];
     // console.log(pokeSpecie.pokedex_numbers[0].pokedex.name);
@@ -62,4 +161,25 @@ async function obtenerRegiones(pokeSpecie){
     const eliminarRepetidos = new Set(arrayRegiones);
     const regiones = Array.from(eliminarRepetidos);
     return regiones;
+}
+
+//Función de ir "pagina principal"
+function goToHome() {
+    clearContent();
+    content.style.display = 'block';
+    content.innerHTML = `
+        <h1>Bienvenido a Mi Página Web</h1>
+        <p>En esta pagina encontraras informacion util acerca de los Pokemon</p>
+    `;
+}
+
+//Función que elimina el contenido del main
+function clearContent() {
+    content.innerHTML = '';
+    pokemonData.innerHTML = '';
+    movesData.innerHTML = '';
+    content.style.display = 'none';
+    pokemonTable.style.display = 'none';
+    movesTable.style.display = 'none';
+    searchResults.innerHTML = '';
 }
