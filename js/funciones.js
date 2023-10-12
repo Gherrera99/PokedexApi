@@ -8,16 +8,33 @@ async function fillPokemonTable(pokemonList) {
     let pokemonDetails = await Promise.all(pokemonDetailsPromises);
 
     pokemonData.innerHTML = '';
-    pokemonDetails.forEach((data) => {
+    // Crea la fila de encabezado de la tabla
+    let headerRow = document.createElement('tr');
+    headerRow.innerHTML = `
+        <th>ID</th>
+        <th>Pokémon</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Generación</th>
+        <th>Región(es)</th>
+    `;
+    pokemonData.appendChild(headerRow);
+
+    for (const data of pokemonDetails) {
         let row = document.createElement('tr');
+        let pokemon = await searchPokemonByName(data.name);
+        let pokeSpecie = await searchPokemonBySpecie(pokemon);
+        let regiones = await obtenerRegiones(pokeSpecie);
         row.innerHTML = `
             <td>${data.id}</td>
             <td><img src="${data.sprites.front_default}"></td>
             <td>${data.name}</td>
             <td>${data.types.map(type => type.type.name).join(', ')}</td>
+            <td>${pokeSpecie.generation.name}</td>
+            <td>${regiones.map(region => region).join(', ')}</td>
         `;
         pokemonData.appendChild(row);
-    });
+    }
 }
 
 // Función para actualizar los botones de paginación
@@ -144,24 +161,6 @@ function crearTabla(pokemonList, busquedaTipo){
     searchResults.appendChild(table);
 }
 
-//Función que obtiene las regiones
-async function obtenerRegiones(pokeSpecie){
-    const arrayRegiones = [];
-    // console.log(pokeSpecie.pokedex_numbers[0].pokedex.name);
-    for(let i = 0; i < pokeSpecie.pokedex_numbers.length; i++){
-        let pokedexName = pokeSpecie.pokedex_numbers[i].pokedex.name;
-        console.log(pokedexName);
-        let auxPokedex = await searchPokemonByPokedex(pokedexName);
-        if(auxPokedex.region === null){
-
-        }else {
-            arrayRegiones.push(auxPokedex.region.name);
-        }
-    }
-    const eliminarRepetidos = new Set(arrayRegiones);
-    const regiones = Array.from(eliminarRepetidos);
-    return regiones;
-}
 
 //Función que elimina el contenido del main
 function clearContent() {
